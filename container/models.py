@@ -18,11 +18,7 @@ class MarkupKey(BaseModel):
         return '{}'.format(self.markup_key)
 
 
-class Container(BaseModel):
-    container_number = models.CharField(max_length=255)
 
-    def __str__(self):
-        return '{}'.format(self.container_number)
 
 
 class PakistaniPayment(models.Model):
@@ -49,13 +45,40 @@ class ChinaPayment(models.Model):
     file = models.FileField(upload_to='attachments/',null=True, blank=True)
 
 
-class Carton(models.Model):
-    container = models.ForeignKey(Container, on_delete=CASCADE)
-    carton_number = models.CharField(max_length=255)
-    carton_name = models.CharField(max_length=255, null=True, blank=True)
+
+class Container(BaseModel):
+    container_number = models.CharField(max_length=255)
+    container_markup=models.ManyToManyField(ContainerMarkup)
+
+
+    def __str__(self):
+        return '{}'.format(self.container_number)
+
+class ContainerMarkup(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    is_active = models.BooleanField(default=True)
+    markup = models.ForeignKey( MarkupKey,on_delete=CASCADE)
+    shipment_date = models.DateTimeField()
+    delivery_date=models.DateTimeField()
+    source=models.CharField()
+    destination = models.CharField()
+    cartons=models.ManyToManyField(Carton)
+    description=models.TextField()
+
 
 
 class Item(models.Model):
-    carton = models.ForeignKey(Carton, on_delete=CASCADE)
     item_number = models.CharField(max_length=255)
     item_name = models.CharField(max_length=255, null=True, blank=True)
+    qunatity=models.IntegerField()
+    rate_per_kg=models.FloatField()
+
+
+class Carton(models.Model):
+    carton_number = models.CharField(max_length=255)
+    carton_name = models.CharField(max_length=255, null=True, blank=True)
+    items=models.ManyToManyField(Item)
+    cbm=models.FloatField()
+    weight=models.FloatField()
+

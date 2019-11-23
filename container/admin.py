@@ -51,10 +51,10 @@ class CartonAdmin(admin.ModelAdmin):
 
 class ItemAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'carton', 'item_number', 'item_name',)
-    list_display_links = ('id', 'carton',)
+        'id',  'item_number', 'item_name',)
+    list_display_links = ('id',)
     list_filter = ['carton', 'item_number',]
-    search_fields = ('id', 'carton',)
+    search_fields = ('id',)
     ordering = ['-id', ]
 
 

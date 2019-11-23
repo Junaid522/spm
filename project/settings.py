@@ -25,7 +25,7 @@ SECRET_KEY = 'cmbg=ed_m@05b54q9h1goezv4%$)mk%pj*c-)2_#%w*r8du@tj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['sea-pack-movers.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -86,8 +86,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'seapackmovers_db',
-        'USER': 'postgres',
-        'PASSWORD': '12345',
+        'USER': 'spm',
+        'PASSWORD': 'pakistan1824',
         'HOST': 'localhost',
         'PORT': '5432',
     }
