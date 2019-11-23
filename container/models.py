@@ -50,7 +50,6 @@ class Container(BaseModel):
     container_number = models.CharField(max_length=255)
     container_markup=models.ManyToManyField(ContainerMarkup)
 
-
     def __str__(self):
         return '{}'.format(self.container_number)
 
