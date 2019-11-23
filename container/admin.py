@@ -42,10 +42,10 @@ class ChinaPaymentAdmin(admin.ModelAdmin):
 
 class CartonAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'container', 'carton_number', 'carton_name',)
-    list_display_links = ('id', 'container',)
-    list_filter = ['container', 'carton_number',]
-    search_fields = ('id', 'container',)
+        'id', 'carton_number', 'carton_name',)
+    list_display_links = ('id',)
+    list_filter = ['carton_number',]
+    search_fields = ('id',)
     ordering = ['-id', ]
 
 

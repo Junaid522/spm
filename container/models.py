@@ -19,18 +19,18 @@ class MarkupKey(BaseModel):
 
 
 class Item(models.Model):
-    item_number = models.CharField(max_length=255)
+    item_number = models.CharField(max_length=255, null=True, blank=True)
     item_name = models.CharField(max_length=255, null=True, blank=True)
-    qunatity=models.IntegerField()
-    rate_per_kg=models.FloatField()
+    qunatity=models.IntegerField(null=True, blank=True)
+    rate_per_kg=models.FloatField(null=True, blank=True)
 
 
 class Carton(models.Model):
-    carton_number = models.CharField(max_length=255)
+    carton_number = models.CharField(max_length=255, null=True, blank=True)
     carton_name = models.CharField(max_length=255, null=True, blank=True)
     items=models.ManyToManyField(Item)
-    cbm=models.FloatField()
-    weight=models.FloatField()
+    cbm=models.FloatField(null=True, blank=True)
+    weight=models.FloatField(null=True, blank=True)
 
 
 class ContainerMarkup(models.Model):
@@ -40,14 +40,14 @@ class ContainerMarkup(models.Model):
     markup = models.ForeignKey( MarkupKey,on_delete=CASCADE)
     shipment_date = models.DateTimeField()
     delivery_date=models.DateTimeField()
-    source=models.CharField()
-    destination = models.CharField()
+    source=models.CharField(max_length=255, null=True, blank=True)
+    destination = models.CharField(max_length=255, null=True, blank=True)
     cartons=models.ManyToManyField(Carton)
-    description=models.TextField()
+    description=models.TextField(null=True, blank=True)
 
 
 class Container(BaseModel):
-    container_number = models.CharField(max_length=255)
+    container_number = models.CharField(max_length=255, null=True, blank=True)
     container_markup=models.ManyToManyField(ContainerMarkup)
 
     def __str__(self):
